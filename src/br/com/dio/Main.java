@@ -17,17 +17,17 @@ import static java.util.stream.Collectors.toMap;
 public class Main {
 
     private final static Scanner scanner = new Scanner(System.in);
-
     private static Board board;
-
     private final static int BOARD_LIMIT = 9;
 
     public static void main(String[] args) {
+
         final var positions = Stream.of(args)
                 .collect(toMap(
                         k -> k.split(";")[0],
                         v -> v.split(";")[1]
                 ));
+
         var option = -1;
         while (true){
             System.out.println("Selecione uma das opções a seguir");
@@ -78,7 +78,6 @@ public class Main {
         System.out.println("O jogo está pronto para começar");
     }
 
-
     private static void inputNumber() {
         if (isNull(board)){
             System.out.println("O jogo ainda não foi iniciado iniciado");
@@ -98,13 +97,13 @@ public class Main {
 
     private static void removeNumber() {
         if (isNull(board)){
-            System.out.println("O jogo ainda não foi iniciado iniciado");
+            System.out.println("O jogo ainda não foi iniciado");
             return;
         }
 
-        System.out.println("Informe a coluna que em que o número será inserido");
+        System.out.println("Informe a coluna em que o número será inserido");
         var col = runUntilGetValidNumber(0, 8);
-        System.out.println("Informe a linha que em que o número será inserido");
+        System.out.println("Informe a linha em que o número será inserido");
         var row = runUntilGetValidNumber(0, 8);
         if (!board.clearValue(col, row)){
             System.out.printf("A posição [%s,%s] tem um valor fixo\n", col, row);
@@ -113,7 +112,7 @@ public class Main {
 
     private static void showCurrentGame() {
         if (isNull(board)){
-            System.out.println("O jogo ainda não foi iniciado iniciado");
+            System.out.println("O jogo ainda não foi iniciado");
             return;
         }
 
@@ -130,7 +129,7 @@ public class Main {
 
     private static void showGameStatus() {
         if (isNull(board)){
-            System.out.println("O jogo ainda não foi iniciado iniciado");
+            System.out.println("O jogo ainda não foi iniciado");
             return;
         }
 
@@ -144,7 +143,7 @@ public class Main {
 
     private static void clearGame() {
         if (isNull(board)){
-            System.out.println("O jogo ainda não foi iniciado iniciado");
+            System.out.println("O jogo ainda não foi iniciado");
             return;
         }
 
@@ -162,7 +161,7 @@ public class Main {
 
     private static void finishGame() {
         if (isNull(board)){
-            System.out.println("O jogo ainda não foi iniciado iniciado");
+            System.out.println("O jogo ainda não foi iniciado");
             return;
         }
 
@@ -171,12 +170,11 @@ public class Main {
             showCurrentGame();
             board = null;
         } else if (board.hasErrors()) {
-            System.out.println("Seu jogo conté, erros, verifique seu board e ajuste-o");
+            System.out.println("Seu jogo contém erros, verifique seu board e ajuste-o");
         } else {
             System.out.println("Você ainda precisa preenhcer algum espaço");
         }
     }
-
 
     private static int runUntilGetValidNumber(final int min, final int max){
         var current = scanner.nextInt();
@@ -186,5 +184,4 @@ public class Main {
         }
         return current;
     }
-
 }
